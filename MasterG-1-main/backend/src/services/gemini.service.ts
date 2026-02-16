@@ -105,7 +105,7 @@ Start your answer NOW in ${languageName}:`;
 
     try {
       const response = await axios.post(
-        `${this.apiUrl}/models/${this.model}:generateContent?key=${this.apiKey}`,
+        `${this.apiUrl}/models/${this.model}:generateContent`,
         {
           contents: [
             {
@@ -139,6 +139,7 @@ Start your answer NOW in ${languageName}:`;
         {
           headers: {
             "Content-Type": "application/json",
+            "x-goog-api-key": this.apiKey,
           },
           timeout: 30000,
         }
@@ -223,7 +224,7 @@ Your direct answer in ${languageName}:`;
 
     try {
       const response = await axios.post(
-        `${this.apiUrl}/models/${this.model}:generateContent?key=${this.apiKey}`,
+        `${this.apiUrl}/models/${this.model}:generateContent`,
         {
           contents: [
             {
@@ -236,7 +237,7 @@ Your direct answer in ${languageName}:`;
           },
         },
         {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "x-goog-api-key": this.apiKey },
           timeout: 30000,
         }
       );
@@ -312,12 +313,12 @@ Your direct answer in ${languageName}:`;
       const subPrompt = `Document Content:\n${pageContent}\n\nQuestion: ${subQuery.query}\n\nAnswer in ${languageName}:`;
 
       const response = await axios.post(
-        `${this.apiUrl}/models/${this.model}:generateContent?key=${this.apiKey}`,
+        `${this.apiUrl}/models/${this.model}:generateContent`,
         {
           contents: [{ parts: [{ text: subPrompt }] }],
           generationConfig: { temperature: 0.6, maxOutputTokens: 1536 },
         },
-        { headers: { "Content-Type": "application/json" }, timeout: 20000 }
+        { headers: { "Content-Type": "application/json", "x-goog-api-key": this.apiKey }, timeout: 20000 }
       );
 
       const subAnswer =
@@ -352,12 +353,12 @@ DO: Provide the final answer immediately in ${languageName}
 Final answer NOW in ${languageName}:`;
 
     const finalResponse = await axios.post(
-      `${this.apiUrl}/models/${this.model}:generateContent?key=${this.apiKey}`,
+      `${this.apiUrl}/models/${this.model}:generateContent`,
       {
         contents: [{ parts: [{ text: synthesisPrompt }] }],
         generationConfig: { temperature: 0.7, maxOutputTokens: 4096 },
       },
-      { headers: { "Content-Type": "application/json" }, timeout: 30000 }
+      { headers: { "Content-Type": "application/json", "x-goog-api-key": this.apiKey }, timeout: 30000 }
     );
 
     const finalAnswer =
@@ -404,12 +405,12 @@ Return a JSON array of relevant page numbers (maximum 10 pages):
 
     try {
       const response = await axios.post(
-        `${this.apiUrl}/models/${this.model}:generateContent?key=${this.apiKey}`,
+        `${this.apiUrl}/models/${this.model}:generateContent`,
         {
           contents: [{ parts: [{ text: analysisPrompt }] }],
           generationConfig: { temperature: 0.3, maxOutputTokens: 256 },
         },
-        { headers: { "Content-Type": "application/json" }, timeout: 10000 }
+        { headers: { "Content-Type": "application/json", "x-goog-api-key": this.apiKey }, timeout: 10000 }
       );
 
       const resultText =
@@ -470,12 +471,12 @@ Now decompose this query into JSON format:
 
     try {
       const response = await axios.post(
-        `${this.apiUrl}/models/${this.model}:generateContent?key=${this.apiKey}`,
+        `${this.apiUrl}/models/${this.model}:generateContent`,
         {
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { temperature: 0.4, maxOutputTokens: 512 },
         },
-        { headers: { "Content-Type": "application/json" }, timeout: 10000 }
+        { headers: { "Content-Type": "application/json", "x-goog-api-key": this.apiKey }, timeout: 10000 }
       );
 
       const resultText =
