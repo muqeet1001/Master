@@ -17,10 +17,6 @@ declare module 'tesseract.js' {
   export const createWorker: any;
 }
 
-declare module 'uuid' {
-  export function v4(): string;
-}
-
 declare module 'langchain/text_splitter' {
   export class RecursiveCharacterTextSplitter {
     constructor(config: any);
