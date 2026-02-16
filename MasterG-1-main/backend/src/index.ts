@@ -3,6 +3,7 @@ import cors from "cors";
 import env from "./config/env";
 import { connectDatabase } from "./config/database";
 import { errorHandler } from "./middleware/error.middleware";
+import { apiLimiter, uploadLimiter, queryLimiter, speechLimiter } from "./middleware/rateLimit.middleware";
 import uploadRoutes from "./routes/upload.routes";
 import queryRoutes from "./routes/query.routes";
 import chatRoutes from "./routes/chat.routes";
@@ -64,19 +65,19 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.use("/api/upload", uploadRoutes);
-app.use("/api/query", queryRoutes);
-app.use("/api/chats", chatRoutes);
-app.use("/api/browse", browseRoutes);
-app.use("/api/posters", posterRoutes);
-app.use("/api/lmr", lmrRoutes);
-app.use("/api/stitch", stitchRoutes);
-app.use("/api/files", filesRoutes);
-app.use("/api/speech", speechRoutes);
-app.use("/api/analyze", analyzeRoutes);
-app.use("/api/board", boardRoutes);
-app.use("/api/document-tree", documentTreeRoutes);
-app.use("/api/plan", planRoutes);
+app.use("/api/upload", uploadLimiter, uploadRoutes);
+app.use("/api/query", queryLimiter, queryRoutes);
+app.use("/api/chats", apiLimiter, chatRoutes);
+app.use("/api/browse", apiLimiter, browseRoutes);
+app.use("/api/posters", apiLimiter, posterRoutes);
+app.use("/api/lmr", apiLimiter, lmrRoutes);
+app.use("/api/stitch", apiLimiter, stitchRoutes);
+app.use("/api/files", apiLimiter, filesRoutes);
+app.use("/api/speech", speechLimiter, speechRoutes);
+app.use("/api/analyze", apiLimiter, analyzeRoutes);
+app.use("/api/board", apiLimiter, boardRoutes);
+app.use("/api/document-tree", apiLimiter, documentTreeRoutes);
+app.use("/api/plan", apiLimiter, planRoutes);
 
 // Error handling middleware (must be last)
 app.use(errorHandler);
