@@ -23,7 +23,8 @@ class SpeechService {
     constructor() {
         // Paths for whisper.cpp binary and model
         const backendRoot = path.resolve(__dirname, "../..");
-        this.whisperPath = path.join(backendRoot, "bin", "whisper", "whisper-cli.exe");
+        const whisperExt = process.platform === 'win32' ? '.exe' : '';
+        this.whisperPath = path.join(backendRoot, "bin", "whisper", `whisper-cli${whisperExt}`);
         this.modelPath = path.join(backendRoot, "models", "whisper", "ggml-base.bin");
         this.tempDir = path.join(backendRoot, "uploads", "temp");
 
@@ -157,7 +158,7 @@ class SpeechService {
 
 
             // Check for common errors
-            if (error.code === 3221225781) {
+            if (process.platform === 'win32' && error.code === 3221225781) {
                 throw new Error(
                     "Whisper CLI is missing required DLLs. Please download the complete whisper.cpp Windows release " +
                     "from https://github.com/ggerganov/whisper.cpp/releases and copy all DLL files " +

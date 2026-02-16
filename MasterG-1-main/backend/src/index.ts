@@ -110,7 +110,8 @@ async function startServer() {
   // Check Whisper availability
   const fs = await import('fs');
   const path = await import('path');
-  const whisperPath = path.join(__dirname, '..', 'bin', 'whisper', 'whisper-cli.exe');
+  const whisperExt = process.platform === 'win32' ? '.exe' : '';
+  const whisperPath = path.join(__dirname, '..', 'bin', 'whisper', `whisper-cli${whisperExt}`);
   if (fs.existsSync(whisperPath)) {
     console.log('Whisper is running');
   }
