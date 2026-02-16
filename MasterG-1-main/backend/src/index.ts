@@ -90,10 +90,10 @@ async function startServer() {
   try {
     const chromaResponse = await fetch(`${env.CHROMA_URL}/api/v1/heartbeat`);
     if (chromaResponse.ok) {
-      console.log('ChromaDB connected');
+      console.log('✅ ChromaDB connected');
     }
   } catch (error) {
-    // ChromaDB not available - silent
+    console.warn('⚠️  ChromaDB not available — uploads and queries will fail. Ensure ChromaDB is running at', env.CHROMA_URL);
   }
 
   // Check Ollama connection
@@ -101,10 +101,10 @@ async function startServer() {
     const ollamaUrl = env.OLLAMA_URL || 'http://localhost:11434';
     const ollamaResponse = await fetch(`${ollamaUrl}/api/tags`);
     if (ollamaResponse.ok) {
-      console.log('Ollama connected');
+      console.log('✅ Ollama connected');
     }
   } catch (error) {
-    // Ollama not available - silent
+    console.warn('⚠️  Ollama not available — AI features will not work. Ensure Ollama is running at', env.OLLAMA_URL || 'http://localhost:11434');
   }
 
   // Check Whisper availability
