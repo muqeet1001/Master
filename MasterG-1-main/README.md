@@ -4,7 +4,6 @@ Welcome to **MasterG** 📚
 ## Project Overview  
 **MasterG** is a lightweight, multilingual AI-powered educational platform that generates curriculum-aligned content in 22+ Indian languages. Designed for **100% offline operation** with **zero reliance on cloud services**, MasterG runs efficiently on low-resource devices (4-8GB RAM) without requiring internet connectivity.
 
-**🏆 MasterG Won First Place at Eduthon Techfest IIT B 29th Edition 🎉**
 
 ## Tech Stack  
 
@@ -48,7 +47,7 @@ Welcome to **MasterG** 📚
 ## Setup and Installation  
 1. **Clone this repository:**  
    ```bash
-   git clone https://github.com/ayuxy027/MasterG.git
+   git clone https://github.com/muqeet1001/Master/tree/main/MasterG-1-main
    ```
 2. **Install frontend dependencies:**  
    ```bash
@@ -94,9 +93,6 @@ Let's keep the spirit of open source alive!
 - If you have any questions or need permission for something specific, feel free to reach out.  
 
 ## Contact  
-If you have any inquiries or suggestions, please reach out:  
-- **Email:** [ayush421301@gmail.com](mailto:ayush421301@gmail.com)  
-- **X (Twitter):** [ayuxy027](https://x.com/ayuxy027)  
-- **GitHub:** [ayuxy027](https://github.com/ayuxy027)  
+ 
 
 ---
