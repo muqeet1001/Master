@@ -475,7 +475,7 @@ const PitchPage = () => {
                 <div className="w-3 h-3 rounded-full bg-red-500"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="ml-4 text-gray-400 text-sm font-mono">github.com/ayuxy027/MasterG</span>
+                <span className="ml-4 text-gray-400 text-sm font-mono">github.com/muqeet1001/Master</span>
               </div>
               <div className="p-4">
                 <img

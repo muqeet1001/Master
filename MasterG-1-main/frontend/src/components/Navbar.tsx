@@ -205,7 +205,7 @@ const Navbar: React.FC<NavbarProps> = ({ alwaysVisible = false }) => {
 
         <div className="flex items-center gap-3 sm:gap-4">
           <a
-            href="https://github.com/ayuxy027/MasterG"
+            href="https://github.com/muqeet1001/Master/tree/main/MasterG-1-main"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:flex items-center justify-center w-9 h-9 text-orange-500 hover:text-orange-600 hover:bg-orange-50 rounded-full transition-all"
@@ -437,7 +437,7 @@ const Navbar: React.FC<NavbarProps> = ({ alwaysVisible = false }) => {
               Posters
             </a>
             <a
-              href="https://github.com/ayuxy027/MasterG"
+              href="https://github.com/muqeet1001/Master/tree/main/MasterG-1-main"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-10 h-10 text-orange-500 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all"
