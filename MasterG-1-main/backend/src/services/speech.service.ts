@@ -1,9 +1,10 @@
-import { exec } from "child_process";
+import { exec, execFile } from "child_process";
 import { promisify } from "util";
 import fs from "fs";
 import path from "path";
 
 const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 interface TranscriptionResult {
     text: string;
@@ -43,9 +44,8 @@ class SpeechService {
     private async convertToWav(inputPath: string, outputPath: string): Promise<void> {
         try {
             // Use ffmpeg to convert to 16kHz mono WAV (required by whisper.cpp)
-            const command = `ffmpeg -y -i "${inputPath}" -ar 16000 -ac 1 -c:a pcm_s16le "${outputPath}"`;
-
-            await execAsync(command);
+            // Using execFileAsync to prevent command injection via filenames
+            await execFileAsync("ffmpeg", ["-y", "-i", inputPath, "-ar", "16000", "-ac", "1", "-c:a", "pcm_s16le", outputPath]);
         } catch (error: any) {
 
             // If ffmpeg fails, try to use the file directly if it's already WAV
@@ -122,16 +122,17 @@ class SpeechService {
         // -otxt: output as text file
         // -np: no prints (quiet mode)
         // --threads: number of CPU threads
-        const command = `"${this.whisperPath}" -m "${this.modelPath}" -f "${wavPath}" -otxt -np --threads 4`;
-
-
-
         try {
-            const { stdout, stderr } = await execAsync(command, {
-                timeout: 120000, // 2 minute timeout
-                maxBuffer: 10 * 1024 * 1024, // 10MB buffer
-                cwd: path.dirname(this.whisperPath), // Run from whisper directory for DLL loading
-            });
+            // Using execFileAsync to prevent command injection via filenames
+            const { stdout, stderr } = await execFileAsync(
+                this.whisperPath,
+                ["-m", this.modelPath, "-f", wavPath, "-otxt", "-np", "--threads", "4"],
+                {
+                    timeout: 120000, // 2 minute timeout
+                    maxBuffer: 10 * 1024 * 1024, // 10MB buffer
+                    cwd: path.dirname(this.whisperPath), // Run from whisper directory for DLL loading
+                }
+            );
 
 
 
